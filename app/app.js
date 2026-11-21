@@ -325,6 +325,15 @@ function wireToolbar() {
     renderChecklist();
   });
 
+  /* Pressing "/" anywhere outside a text field jumps to the search box. */
+  document.addEventListener('keydown', function (ev) {
+    var tag = document.activeElement && document.activeElement.tagName;
+    if (ev.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA') {
+      ev.preventDefault();
+      document.getElementById('search').focus();
+    }
+  });
+
   document.getElementById('grade-filters').addEventListener('click', function (ev) {
     var btn = ev.target.closest('[data-grade]');
     if (!btn) return;
