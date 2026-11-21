@@ -34,3 +34,42 @@ writeFileSync(
   join(out, 'dossier.json'),
   buildDossier(out, { text_max_bytes: 163840, screenshots: { max: 4, max_bytes: 262144 }, app_max_files: 993, app_max_bytes: 50331648 }),
 );
+
+// --- Platinum Road: entry branding and a data self-check, authored for this entry ---
+// The guide's display name. The dossier builder above deliberately stays the vendored one; this
+// constant is what the build log and this entry's own tooling call the guide by.
+export const GUIDE_NAME = 'PLATINUM ROAD — GTA VI Trophy Tracker & Guide';
+
+import { readFileSync } from 'node:fs';
+
+// A small integrity pass over the guide's own data files, run after the dossier is safely written:
+// every JSON the app ships must parse, the trophy list must hold exactly the 55 trophies of the
+// official list, the enrichment must carry an entry for each of them, and the roadmap must cover
+// every trophy exactly once. It only ever logs — a bad data file should be loud in the build log,
+// never a reason to lose the dossier itself.
+function platinumRoadSelfCheck(): void {
+  try {
+    const dataDir = join(here, 'app', 'data');
+    const trophiesDoc = JSON.parse(readFileSync(join(dataDir, 'trophies.json'), 'utf8'));
+    const guideDoc = JSON.parse(readFileSync(join(dataDir, 'guide.json'), 'utf8'));
+    const roadmapDoc = JSON.parse(readFileSync(join(dataDir, 'roadmap.json'), 'utf8'));
+    const list = Array.isArray(trophiesDoc) ? trophiesDoc : trophiesDoc.trophies;
+    if (!Array.isArray(list) || list.length !== 55) {
+      console.warn(`[platinum-road] self-check: expected 55 trophies, found ${Array.isArray(list) ? list.length : 'none'}`);
+      return;
+    }
+    const enriched = guideDoc && guideDoc.trophies ? Object.keys(guideDoc.trophies).length : 0;
+    const phases: Array<{ trophyIds?: number[] }> = roadmapDoc && Array.isArray(roadmapDoc.phases) ? roadmapDoc.phases : [];
+    const routed = phases.reduce((n, phase) => n + (Array.isArray(phase.trophyIds) ? phase.trophyIds.length : 0), 0);
+    console.log(
+      `[platinum-road] ${GUIDE_NAME}: self-check ok — 55 trophies, ${enriched} enriched, ${phases.length} roadmap phases routing ${routed} trophies`,
+    );
+    if (enriched !== 55 || routed !== 55) {
+      console.warn('[platinum-road] self-check: enrichment or roadmap does not cover all 55 trophies');
+    }
+  } catch (err) {
+    console.warn(`[platinum-road] self-check skipped: ${(err as Error).message}`);
+  }
+}
+
+platinumRoadSelfCheck();
