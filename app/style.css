@@ -1,0 +1,541 @@
+/* PLATINUM ROAD — dark charcoal "Vice" theme: hot pink + cyan neon over near-black,
+   with one accent colour per trophy grade. No global reset: elements are styled
+   where they are used. */
+
+:root {
+  --bg: #101014;
+  --bg-raised: #17171e;
+  --bg-card: #1b1b24;
+  --line: #2b2b38;
+  --text: #eceaf2;
+  --text-dim: #a49fb5;
+  --pink: #ff2e88;
+  --pink-soft: rgba(255, 46, 136, 0.16);
+  --cyan: #2fd8e8;
+  --cyan-soft: rgba(47, 216, 232, 0.14);
+  --gold: #f2b63d;
+  --silver: #c9ced9;
+  --bronze: #d08a4e;
+  --danger: #ff5470;
+  --radius: 12px;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1100px 480px at 85% -80px, rgba(47, 216, 232, 0.10), transparent 60%),
+    radial-gradient(900px 520px at 8% -120px, rgba(255, 46, 136, 0.12), transparent 55%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+h1, h2, h3, p, dl, dd, dt {
+  margin-top: 0;
+}
+
+/* ---------- header + progress summary ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: rgba(16, 16, 20, 0.72);
+}
+
+.header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 20px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wordmark {
+  margin-bottom: 4px;
+  font-size: 2.35rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  text-shadow: 0 0 22px rgba(255, 46, 136, 0.35);
+}
+
+.wordmark-accent {
+  color: var(--pink);
+  text-shadow: 0 0 22px rgba(47, 216, 232, 0.45);
+}
+
+.tagline {
+  margin-bottom: 0;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 20px 14px 14px;
+}
+
+.ring-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex: none;
+}
+
+.ring {
+  transform: rotate(-90deg);
+  display: block;
+}
+
+.ring-track {
+  fill: none;
+  stroke: #262633;
+  stroke-width: 9;
+}
+
+.ring-value {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 263.9;
+  stroke-dashoffset: 263.9;
+  transition: stroke-dashoffset 0.45s ease;
+  filter: drop-shadow(0 0 6px rgba(47, 216, 232, 0.55));
+}
+
+.ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.summary-stats {
+  margin-bottom: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.summary-stats div {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.summary-stats dt {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  min-width: 74px;
+}
+
+.summary-stats dd {
+  margin: 0 0 0 0;
+  font-weight: 600;
+}
+
+/* ---------- toolbar ---------- */
+
+.toolbar {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px 20px 4px;
+}
+
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 12px;
+}
+
+.search-label, .filter-label {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+#search {
+  flex: 1 1 260px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  padding: 9px 16px;
+  font-size: 0.95rem;
+}
+
+#search:focus {
+  outline: 2px solid var(--cyan);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+button, .import-label {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:hover, .import-label:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+button.danger:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  padding: 6px 13px;
+  font-size: 0.85rem;
+}
+
+.chip.active {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(255, 46, 136, 0.45);
+}
+
+.chip.active:hover {
+  color: #fff;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.9rem;
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  padding: 6px 13px;
+}
+
+.toggle input {
+  accent-color: var(--pink);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.view-toggle[aria-pressed="true"] {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: #06222b;
+  font-weight: 700;
+}
+
+/* ---------- missable banner ---------- */
+
+.missable-banner {
+  max-width: 1040px;
+  margin: 10px auto 4px;
+  padding: 13px 18px;
+  border: 1px solid var(--gold);
+  border-left: 6px solid var(--gold);
+  border-radius: var(--radius);
+  background: rgba(242, 182, 61, 0.10);
+  color: #ffe1a1;
+  font-size: 0.93rem;
+}
+
+/* ---------- layout ---------- */
+
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 14px 20px 30px;
+}
+
+.result-count {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin-bottom: 12px;
+}
+
+.empty-state {
+  color: var(--text-dim);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  text-align: center;
+}
+
+/* ---------- trophy cards ---------- */
+
+.checklist {
+  display: grid;
+  gap: 10px;
+}
+
+.trophy-card {
+  display: flex;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  align-items: flex-start;
+}
+
+.trophy-card.grade-platinum { border-left-color: var(--cyan); }
+.trophy-card.grade-gold { border-left-color: var(--gold); }
+.trophy-card.grade-silver { border-left-color: var(--silver); }
+.trophy-card.grade-bronze { border-left-color: var(--bronze); }
+
+.trophy-card.earned {
+  background: linear-gradient(90deg, rgba(47, 216, 232, 0.07), var(--bg-card) 55%);
+}
+
+.trophy-card.masked {
+  cursor: pointer;
+}
+
+.trophy-check {
+  flex: none;
+  padding-top: 3px;
+}
+
+.trophy-check input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--cyan);
+  cursor: pointer;
+}
+
+.trophy-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.trophy-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.trophy-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.trophy-card.earned .trophy-name {
+  color: var(--cyan);
+}
+
+.grade-pill {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 2px 9px;
+  border: 1px solid var(--line);
+  color: var(--text-dim);
+}
+
+.grade-pill.grade-platinum {
+  color: #06222b;
+  border-color: transparent;
+  background: linear-gradient(100deg, #7ff3ff, #2fd8e8 45%, #b8fbff 70%, #ff9ad5);
+}
+
+.grade-pill.grade-gold { color: var(--gold); border-color: var(--gold); }
+.grade-pill.grade-silver { color: var(--silver); border-color: var(--silver); }
+.grade-pill.grade-bronze { color: var(--bronze); border-color: var(--bronze); }
+
+.badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  padding: 2px 7px;
+  text-transform: uppercase;
+}
+
+.badge-hidden {
+  background: #34344a;
+  color: #c9c4e8;
+  border: 1px dashed #6d6a94;
+}
+
+.badge-missable {
+  background: rgba(242, 182, 61, 0.18);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+}
+
+.badge-unconfirmed {
+  background: var(--pink-soft);
+  color: #ff9ec7;
+  border: 1px solid var(--pink);
+}
+
+.badge-kind {
+  background: var(--cyan-soft);
+  color: var(--cyan);
+  border: 1px solid rgba(47, 216, 232, 0.5);
+}
+
+.trophy-desc {
+  color: var(--text-dim);
+  margin-bottom: 5px;
+  font-size: 0.94rem;
+}
+
+.trophy-guide {
+  font-size: 0.92rem;
+  margin-bottom: 0;
+}
+
+.trophy-guide .guide-label {
+  color: var(--pink);
+  font-weight: 700;
+}
+
+.trophy-note {
+  margin: 7px 0 0;
+  font-size: 0.88rem;
+  color: #ff9ec7;
+}
+
+.trophy-missable-reason {
+  margin: 7px 0 0;
+  font-size: 0.88rem;
+  color: #ffe1a1;
+}
+
+.reveal-hint {
+  color: var(--text-dim);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+/* ---------- roadmap ---------- */
+
+.roadmap-intro h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.roadmap-intro p {
+  color: var(--text-dim);
+  max-width: 75ch;
+}
+
+.roadmap-intro .difficulty {
+  color: var(--text);
+  border-left: 4px solid var(--pink);
+  padding-left: 12px;
+}
+
+.phase {
+  margin-top: 26px;
+}
+
+.phase-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 16px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.phase-step {
+  color: var(--pink);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.phase-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.phase-progress {
+  color: var(--cyan);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.phase-goal {
+  color: var(--text-dim);
+  max-width: 85ch;
+  margin-bottom: 12px;
+}
+
+.phase .trophy-card {
+  margin-bottom: 10px;
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.site-footer p {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px 20px 26px;
+}
+
+@media (max-width: 640px) {
+  .header-inner { padding: 20px 14px 16px; }
+  .wordmark { font-size: 1.8rem; }
+  .toolbar, main { padding-left: 14px; padding-right: 14px; }
+  .summary { width: 100%; }
+  .missable-banner { margin-left: 14px; margin-right: 14px; }
+}

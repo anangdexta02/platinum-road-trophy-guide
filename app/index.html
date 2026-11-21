@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platinum Road — GTA VI Trophy Tracker &amp; Guide</title>
+<meta name="description" content="Platinum Road: a tracker and guide for all 55 Grand Theft Auto VI trophies — checklist, roadmap, missable warnings, and progress that lives in your browser.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <h1 class="wordmark">PLATINUM <span class="wordmark-accent">ROAD</span></h1>
+      <p class="tagline">Grand Theft Auto VI — trophy tracker &amp; platinum guide · PlayStation 5</p>
+    </div>
+    <section class="summary" aria-label="Your progress">
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Completion percentage">
+          <circle class="ring-track" cx="48" cy="48" r="42"></circle>
+          <circle class="ring-value" id="ring-value" cx="48" cy="48" r="42"></circle>
+        </svg>
+        <div class="ring-label"><span id="percent">0%</span></div>
+      </div>
+      <dl class="summary-stats">
+        <div><dt>Trophies</dt><dd><span id="earned-count">0</span> / 55 earned</dd></div>
+        <div><dt>Points</dt><dd><span id="points-earned">0</span> / <span id="points-total">1350</span> pts</dd></div>
+        <div><dt>Platinum</dt><dd id="platinum-status">still on the road</dd></div>
+      </dl>
+    </section>
+  </div>
+</header>
+
+<div class="toolbar" role="region" aria-label="Checklist tools">
+  <div class="toolbar-row">
+    <label class="search-label" for="search">Search</label>
+    <input id="search" type="search" placeholder="Name, description or guide text…" autocomplete="off">
+    <div class="toolbar-actions">
+      <button id="export-btn" type="button">Export</button>
+      <label class="import-label" for="import-file">Import</label>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+      <button id="reset-btn" type="button" class="danger">Reset</button>
+    </div>
+  </div>
+  <div class="toolbar-row filters">
+    <span class="filter-label">Grade</span>
+    <div class="chip-group" id="grade-filters" role="group" aria-label="Filter by grade">
+      <button type="button" class="chip active" data-grade="all">All</button>
+      <button type="button" class="chip" data-grade="platinum">Platinum</button>
+      <button type="button" class="chip" data-grade="gold">Gold</button>
+      <button type="button" class="chip" data-grade="silver">Silver</button>
+      <button type="button" class="chip" data-grade="bronze">Bronze</button>
+    </div>
+    <span class="filter-label">Status</span>
+    <div class="chip-group" id="status-filters" role="group" aria-label="Filter by status">
+      <button type="button" class="chip active" data-status="all">All</button>
+      <button type="button" class="chip" data-status="remaining">Remaining</button>
+      <button type="button" class="chip" data-status="earned">Earned</button>
+    </div>
+    <label class="toggle">
+      <input id="missable-toggle" type="checkbox">
+      <span>Missable only</span>
+    </label>
+    <button id="view-toggle" type="button" class="view-toggle" aria-pressed="false">Roadmap</button>
+  </div>
+</div>
+
+<aside id="missable-banner" class="missable-banner" hidden>
+  <strong>One trophy can be lost:</strong>
+  <span><em>Positive Mental Attitude</em> — one of its meditation spots is tied to a Chapter 1 invitation at Jason's house and disappears for good when Chapter 1 ends. Meditate there before you finish the chapter; every other spot can wait.</span>
+</aside>
+
+<main>
+  <section id="checklist-view" aria-label="Trophy checklist">
+    <p id="result-count" class="result-count"></p>
+    <div id="checklist" class="checklist"></div>
+    <p id="empty-state" class="empty-state" hidden>No trophies match those filters. Loosen the search or pick a different grade.</p>
+  </section>
+
+  <section id="roadmap-view" aria-label="Roadmap to the platinum" hidden>
+    <div class="roadmap-intro">
+      <h2>The road to platinum</h2>
+      <p id="roadmap-about"></p>
+      <p id="roadmap-difficulty" class="difficulty"></p>
+    </div>
+    <div id="roadmap"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Platinum Road is a fan-made tracker. Trophy names and descriptions are the official PlayStation list for Grand Theft Auto VI; guide notes were researched and cross-checked, and the five trophies whose methods no source has confirmed are flagged in the list rather than guessed at. Your progress is stored only in this browser (localStorage) — export it if you want a backup.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
